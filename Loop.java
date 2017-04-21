@@ -1,4 +1,4 @@
-package gametoolkit.engine;
+package engine;
 
 /**
  * Created by zeejfps on 4/21/17.
@@ -14,7 +14,7 @@ public class Loop implements Runnable {
     private double nsPerUpdate;
 
     public Loop(final Listener listener) {
-        this(listener, 60);
+        this(listener, 30);
     }
 
     public Loop(final Listener listener, double fixedUpdateInterval) {
@@ -60,13 +60,13 @@ public class Loop implements Runnable {
 
     public void setFixedUpdateInterval(double interval) {
         if (interval < 1.0) interval = 1.0;
-        nsPerUpdate = interval / NS_PER_SECOND;
+        nsPerUpdate = NS_PER_SECOND / interval;
     }
 
     public interface Listener {
         void onStart();
-        void onUpdate();
         void onFixedUpdate();
+        void onUpdate();
         void onRender();
         void onStop();
     }
